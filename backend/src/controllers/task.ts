@@ -81,3 +81,29 @@ export const removeTask: RequestHandler = async (req, res, next) => {
     next(error);
   }
 };
+
+export const updateTask: RequestHandler = async (req, res, next) => {
+  const errors = validationResult(req);
+
+  const paramsID = req.params.id;
+  const bodyID = req.body._id;
+
+  try {
+    validationErrorParser(errors);
+
+    if (paramsID !== bodyID) {
+      return res.status(400).json({ error: "IDs do not match" });
+    }
+
+    const updatedTask = await TaskModel.findByIdAndUpdate(paramsID, req.body);
+    if (updatedTask === null) {
+      throw createHttpError(404, "Task not found.");
+    }
+
+    const queriedUpdatedTask = await TaskModel.findById(paramsID);
+
+    res.status(200).json(queriedUpdatedTask);
+  } catch (error) {
+    next(error);
+  }
+};

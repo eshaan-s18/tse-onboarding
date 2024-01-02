@@ -18,7 +18,6 @@ export function Home() {
       </p>
       <TaskForm mode="create" />
       <TaskList title="All tasks" />
-      
     </Page>
   );
 }

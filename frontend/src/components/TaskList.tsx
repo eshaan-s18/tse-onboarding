@@ -12,14 +12,12 @@ export function TaskList({ title }: TaskListProps) {
 
   useEffect(() => {
     getAllTasks().then((result) => {
-        if (result.success) {
-            setTasks(result.data);
-        }
-        else {
-            alert(result.error);
-        }
+      if (result.success) {
+        setTasks(result.data);
+      } else {
+        alert(result.error);
+      }
     });
-    
   }, []);
 
   return (
@@ -27,12 +25,10 @@ export function TaskList({ title }: TaskListProps) {
       <span className={styles.title}>{title}</span>
       <div className={styles.textContainer}>
         {tasks.length === 0 ? (
-          <p>
-            No tasks yet. Add one above to get started.
-          </p>
-        ) : tasks.map((task) => (
-          <TaskItem key={task._id} task={task}  />
-        ))}
+          <p>No tasks yet. Add one above to get started.</p>
+        ) : (
+          tasks.map((task) => <TaskItem key={task._id} task={task} />)
+        )}
       </div>
     </div>
   );
