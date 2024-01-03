@@ -1,0 +1,77 @@
+.taskTitle {
+  font: var(--font-heading);
+  margin-top: 30px;
+  width: 100%;
+  max-width: 48rem;
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.pageRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  column-gap: 2rem;
+  align-items: flex-end;
+}
+
+.taskDescription {
+  margin-top: 30px;
+  word-wrap: break-word;
+}
+
+.assignee {
+  font: var(--font-label);
+  max-width: 55rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.assigneeRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  column-gap: 2rem;
+  align-items: flex-end;
+  margin-top: 30px;
+}
+
+.status {
+  font: var(--font-label);
+}
+
+.statusRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  column-gap: 2rem;
+  align-items: flex-end;
+  margin-top: 30px;
+}
+
+.date {
+  font: var(--font-label);
+}
+
+.dateRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  column-gap: 2rem;
+  align-items: flex-end;
+  margin-top: 30px;
+}
+
+.hidden {
+  display: none;
+}
+
+.button {
+}

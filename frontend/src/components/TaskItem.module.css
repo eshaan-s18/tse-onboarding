@@ -8,6 +8,10 @@
   column-gap: 0.25rem;
 }
 
+.item:hover {
+  background-color: var(--color-surface);
+}
+
 .textContainer {
   height: 100%;
   flex-grow: 1;
@@ -27,6 +31,7 @@
 
 .title {
   font: var(--font-label);
+  text-align: left;
 }
 
 .description {
@@ -35,4 +40,25 @@
 
 .checked {
   color: var(--color-text-secondary);
+}
+
+.textContainer a {
+  text-decoration: none;
+  color: inherit;
+  align-items: end;
+  text-align: left;
+  font: var(--font-label);
+
+  --unchecked-color: var(--color-text-primary);
+  --checked-color: var(--color-text-secondary);
+  color: var(--unchecked-color);
+
+  &:hover {
+    text-decoration: underline;
+    color: var(--unchecked-color);
+  }
+}
+
+a.checked {
+  color: var(--checked-color);
 }
