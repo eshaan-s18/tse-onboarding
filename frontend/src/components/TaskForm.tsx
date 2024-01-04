@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  createTask,
-  updateTask,
-  type Task,
-  UpdateTaskRequest,
-  CreateTaskRequest,
-} from "src/api/tasks";
+import { createTask, updateTask, type Task } from "src/api/tasks";
 import { Button, TextField } from "src/components";
 import styles from "src/components/TaskForm.module.css";
 
@@ -58,18 +52,15 @@ export function TaskForm({ mode, task, onSubmit }: TaskFormProps) {
     setLoading(true);
 
     const taskData = {
-      _id: task?._id,
+      _id: task?._id ?? "",
       title,
       description,
-      isChecked: task?.isChecked,
-      dateCreated: task?.dateCreated,
+      isChecked: task?.isChecked ?? false,
+      dateCreated: task?.dateCreated ?? new Date(),
       assignee,
     };
 
-    const taskMethod =
-      mode === "create"
-        ? createTask(taskData as CreateTaskRequest)
-        : updateTask(taskData as UpdateTaskRequest);
+    const taskMethod = mode === "create" ? createTask(taskData) : updateTask(taskData);
 
     taskMethod.then((result) => {
       if (result.success) {
