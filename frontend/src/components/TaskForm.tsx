@@ -50,7 +50,6 @@ export function TaskForm({ mode, task, onSubmit }: TaskFormProps) {
   const [errors, setErrors] = useState<TaskFormErrors>({});
 
   const handleSubmit = () => {
-    // first, do any validation that we can on the frontend
     setErrors({});
     if (title.length === 0) {
       setErrors({ title: true });
@@ -77,8 +76,7 @@ export function TaskForm({ mode, task, onSubmit }: TaskFormProps) {
         setTitle("");
         setDescription("");
         setAssignee("");
-        // onSubmit may be undefined, in which case we can't call it--this is
-        // a neat way to only call it if it's NOT undefined
+
         onSubmit && onSubmit(result.data);
       } else {
         // You should always clearly inform the user when something goes wrong.

@@ -21,7 +21,7 @@ export function TaskItem({ task: initialTask }: TaskItemProps) {
       description: task?.description,
       isChecked: !task?.isChecked,
       dateCreated: task?.dateCreated,
-      assignee: task?.assignee?._id, // Assign the assignee ID as a string or undefined
+      assignee: task?.assignee?._id,
     };
     updateTask(updatedTask).then((result) => {
       if (result.success) {

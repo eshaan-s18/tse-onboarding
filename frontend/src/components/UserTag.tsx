@@ -1,5 +1,4 @@
 import React from "react";
-// import { User } from "src/api/users";
 import styles from "src/components/UserTag.module.css";
 
 export interface UserTagProps {
