@@ -20,6 +20,7 @@
   justify-content: space-evenly;
   align-items: center;
   overflow: hidden;
+  width: 100px;
 }
 
 .textContainer span {
@@ -61,4 +62,11 @@
 
 a.checked {
   color: var(--checked-color);
+}
+
+.h4 {
+  width: 11.5rem;
+  font: var(--font-body);
+  text-align: left;
+  margin-bottom: 2rem;
 }

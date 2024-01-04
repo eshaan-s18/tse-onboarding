@@ -39,8 +39,8 @@
   flex-direction: row;
   justify-content: flex-start;
   column-gap: 2rem;
-  align-items: flex-end;
-  margin-top: 30px;
+  align-items: center;
+  margin-top: 0px;
 }
 
 .status {
@@ -53,7 +53,7 @@
   justify-content: flex-start;
   column-gap: 2rem;
   align-items: flex-end;
-  margin-top: 30px;
+  margin-top: 0px;
 }
 
 .date {

@@ -1,0 +1,28 @@
+.profilePicture {
+  border-width: 10px;
+  border-color: red;
+  height: 30px;
+}
+
+.userTagStyle {
+  width: 12rem;
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  column-gap: 0.25rem;
+  width: 12rem;
+  align-items: center;
+}
+
+.userName {
+  text-align: center;
+  margin-bottom: 2rem;
+  margin-left: 5px;
+  font: var(--font-body);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

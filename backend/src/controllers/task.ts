@@ -60,7 +60,7 @@ export const createTask: RequestHandler = async (req, res, next) => {
       description: description,
       isChecked: isChecked,
       dateCreated: Date.now(),
-      assignee,
+      assignee: assignee,
     });
 
     const populatedTask = await TaskModel.findById(task._id).populate("assignee");

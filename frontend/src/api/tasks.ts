@@ -1,5 +1,5 @@
 import { type APIResult, get, handleAPIError, post, put } from "src/api/requests";
-//import { User } from "src/api/users";
+import { User } from "src/api/users";
 
 /**
  * Defines the "shape" of a Task object (what fields are present and their types) for
@@ -12,7 +12,7 @@ export interface Task {
   description?: string;
   isChecked: boolean;
   dateCreated: Date;
-  assignee?: string;
+  assignee?: User;
 }
 
 /**
@@ -30,7 +30,7 @@ interface TaskJSON {
   description?: string;
   isChecked: boolean;
   dateCreated: string;
-  assignee?: string;
+  assignee?: User;
 }
 
 /**
