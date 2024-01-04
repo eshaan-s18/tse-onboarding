@@ -29,30 +29,23 @@ export const getTask: RequestHandler = async (req, res, next) => {
   const { id } = req.params;
 
   try {
-    // if the ID doesn't exist, then findById returns null
-    const task = await TaskModel.findById(id);
+    const task = await TaskModel.findById(id).populate("assignee");
 
     if (task === null) {
       throw createHttpError(404, "Task not found.");
     }
 
-    // Set the status code (200) and body (the task object as JSON) of the response.
-    // Note that you don't need to return anything, but you can still use a return
-    // statement to exit the function early.
     res.status(200).json(task);
   } catch (error) {
-    // pass errors to the error handler
     next(error);
   }
 };
 
 export const createTask: RequestHandler = async (req, res, next) => {
-  // extract any errors that were found by the validator
   const errors = validationResult(req);
-  const { title, description, isChecked } = req.body;
+  const { title, description, isChecked, assignee } = req.body;
 
   try {
-    // if there are errors, then this function throws an exception
     validationErrorParser(errors);
 
     const task = await TaskModel.create({
@@ -60,11 +53,12 @@ export const createTask: RequestHandler = async (req, res, next) => {
       description: description,
       isChecked: isChecked,
       dateCreated: Date.now(),
+      assignee: assignee,
     });
 
-    // 201 means a new resource has been created successfully
-    // the newly created task is sent back to the user
-    res.status(201).json(task);
+    const populatedTask = await TaskModel.findById(task._id).populate("assignee");
+
+    res.status(201).json(populatedTask);
   } catch (error) {
     next(error);
   }
@@ -95,7 +89,7 @@ export const updateTask: RequestHandler = async (req, res, next) => {
       return res.status(400).json({ error: "IDs do not match" });
     }
 
-    const updatedTask = await TaskModel.findByIdAndUpdate(paramsID, req.body);
+    const updatedTask = await TaskModel.findByIdAndUpdate(paramsID, req.body).populate("assignee");
     if (updatedTask === null) {
       throw createHttpError(404, "Task not found.");
     }

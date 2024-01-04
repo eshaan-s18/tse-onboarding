@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { createTask, type Task } from "src/api/tasks";
+import { createTask, updateTask, type Task } from "src/api/tasks";
 import { Button, TextField } from "src/components";
 import styles from "src/components/TaskForm.module.css";
 
@@ -38,24 +38,36 @@ interface TaskFormErrors {
 export function TaskForm({ mode, task, onSubmit }: TaskFormProps) {
   const [title, setTitle] = useState<string>(task?.title || "");
   const [description, setDescription] = useState<string>(task?.description || "");
+  const [assignee, setAssignee] = useState<string>(task?.assignee?._id || "");
+
   const [isLoading, setLoading] = useState<boolean>(false);
   const [errors, setErrors] = useState<TaskFormErrors>({});
 
   const handleSubmit = () => {
-    // first, do any validation that we can on the frontend
     setErrors({});
     if (title.length === 0) {
       setErrors({ title: true });
       return;
     }
     setLoading(true);
-    createTask({ title, description }).then((result) => {
+
+    const taskData = {
+      _id: task?._id ?? "",
+      title,
+      description,
+      isChecked: task?.isChecked ?? false,
+      dateCreated: task?.dateCreated ?? new Date(),
+      assignee,
+    };
+
+    const taskMethod = mode === "create" ? createTask(taskData) : updateTask(taskData);
+
+    taskMethod.then((result) => {
       if (result.success) {
-        // clear the form
         setTitle("");
         setDescription("");
-        // onSubmit may be undefined, in which case we can't call it--this is
-        // a neat way to only call it if it's NOT undefined
+        setAssignee("");
+
         onSubmit && onSubmit(result.data);
       } else {
         // You should always clearly inform the user when something goes wrong.
@@ -101,6 +113,15 @@ export function TaskForm({ mode, task, onSubmit }: TaskFormProps) {
         />
         {/* set `type="primary"` on the button so the browser doesn't try to
         handle it specially (because it's inside a `<form>`) */}
+      </div>
+      <div className={styles.formRow}>
+        <TextField
+          className={`${styles.textField}`}
+          data-testid="task-assignee-input"
+          label="Assignee ID (optional)"
+          value={assignee}
+          onChange={(event) => setAssignee(event.target.value)}
+        />
         <Button
           kind="primary"
           type="button"
